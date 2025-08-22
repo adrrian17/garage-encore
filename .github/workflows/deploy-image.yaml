@@ -36,7 +36,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: npm ci --ignore-scripts --legacy-peer-deps
         working-directory: apps/backend
 
       - name: Build Docker image

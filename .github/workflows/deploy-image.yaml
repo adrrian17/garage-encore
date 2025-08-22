@@ -31,7 +31,7 @@ jobs:
         run: bash install.sh
 
       - name: Build Docker image
-        run: /home/runner/.encore/bin/encore build --config railway-infra.config.json docker garage-encore
+        run: /home/runner/.encore/bin/encore build --config infra-config.json docker garage-encore
         working-directory: apps/backend
 
       - name: Tag Docker image

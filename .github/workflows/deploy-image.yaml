@@ -32,6 +32,7 @@ jobs:
 
       - name: Build Docker image
         run: /home/runner/.encore/bin/encore build --config infra-config.json docker garage-encore
+        working-directory: backend
 
       - name: Tag Docker image
         run: docker tag garage-encore ghcr.io/${{ github.repository }}:latest

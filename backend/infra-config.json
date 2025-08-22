@@ -8,10 +8,13 @@
   },
   "sql_servers": [
     {
-      "host": "postgres:5432",
+      "host": "trolley.proxy.rlwy.net:32732",
+      "tls_config": {
+        "disable_ca_validation": true
+      },
       "databases": {
-        "garage": {
-          "username": "admin",
+        "railway": {
+          "username": "postgres",
           "password": {
             "$env": "DB_PASSWORD"
           }

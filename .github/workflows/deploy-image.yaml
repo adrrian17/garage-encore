@@ -30,11 +30,9 @@ jobs:
       - name: Install Encore CLI
         run: bash install.sh
 
-      - name: Change directory
-        run: cd apps/backend
-
       - name: Build Docker image
         run: /home/runner/.encore/bin/encore build --config railway-infra.config.json docker garage-encore
+        working-directory: apps/backend
 
       - name: Tag Docker image
         run: docker tag garage-encore ghcr.io/${{ github.repository }}:latest

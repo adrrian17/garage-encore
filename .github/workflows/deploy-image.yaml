@@ -30,8 +30,8 @@ jobs:
       - name: Install Encore CLI
         run: bash install.sh
 
-      - name: Change director
-        run: cd /apps/backend
+      - name: Change directory
+        run: cd apps/backend
 
       - name: Build Docker image
         run: /home/runner/.encore/bin/encore build --config railway-infra.config.json docker garage-encore

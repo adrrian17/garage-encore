@@ -1,0 +1,25 @@
+{
+  "name": "encore-ts-starter",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Encore Typescript Starter",
+  "license": "MPL-2.0",
+  "type": "module",
+  "dependencies": {
+    "@react-email/components": "^0.5.0",
+    "@react-email/render": "^1.2.0",
+    "drizzle-orm": "^0.44.4",
+    "encore.dev": "^1.48.13",
+    "pg": "^8.16.3",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "resend": "^6.0.1",
+    "stripe": "^14.21.0"
+  },
+  "devDependencies": {
+    "@types/amqplib": "^0.10.4",
+    "@types/node": "^20.5.7",
+    "drizzle-kit": "^0.31.4",
+    "typescript": "^5.2.2"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://encore.dev/schemas/infra.schema.json",
+  "metadata": {
+    "app_id": "garage-comics",
+    "env_name": "development",
+    "env_type": "development",
+    "base_url": "https://api.garagecomics.com"
+  },
+  "sql_servers": [
+    {
+      "host": "postgres:5432",
+      "databases": {
+        "garage": {
+          "username": "admin",
+          "password": {
+            "$env": "DB_PASSWORD"
+          }
+        }
+      }
+    }
+  ],
+  "pubsub": [
+    {
+      "type": "nsq",
+      "hosts": "nsq.myencoreapp.com:4150",
+      "topics": {
+        "orders": {
+          "name": "orders",
+          "subscriptions": {
+            "send-order-confirmation": {
+              "name": "send-order-confirmation"
+            },
+            "process-orders": {
+              "name": "process-orders"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

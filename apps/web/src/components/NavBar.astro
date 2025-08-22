@@ -1,0 +1,138 @@
+---
+import { Image } from "astro:assets";
+import Logo from "../images/logo.png";
+import CartButton from "./CartButton.tsx";
+
+const { pathname } = Astro.url;
+
+const links = [
+  { href: "/", name: "Inicio" },
+  { href: "/expositores", name: "Expositores" },
+  { href: "/comics", name: "Cómics" },
+  { href: "/reglas", name: "Reglas" },
+  { href: "/faqs", name: "FAQs" },
+  { href: "/staff", name: "Staff" },
+];
+---
+
+<header class="mt-6">
+  <div class="container mx-auto">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex-shrink-0">
+        <a href="/" class="flex items-center">
+          <Image
+            width={250}
+            src={Logo}
+            alt="Festival Digital de Cómics Logo"
+            class="h-20 w-auto"
+          />
+        </a>
+      </div>
+
+      <!-- Desktop Menu -->
+      <nav class="hidden md:flex md:items-center md:space-x-8">
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                "font-medium text-gray-600 hover:text-blue-600 dark:text-neutral-300 dark:hover:text-blue-400 transition-colors duration-200",
+                {
+                  "text-blue-600 dark:text-blue-400": pathname === link.href,
+                },
+              ]}
+            >
+              {link.name}
+            </a>
+          ))
+        }
+      </nav>
+
+      <div class="flex items-center">
+        <div class="hidden md:block">
+          <CartButton client:load />
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden flex items-center">
+          <button
+            id="mobile-menu-button"
+            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 dark:hover:bg-gray-800"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Open main menu</span>
+            <svg
+              class="block h-6 w-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+            <svg
+              class="hidden h-6 w-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu, show/hide based on menu state. -->
+  <div class="md:hidden hidden" id="mobile-menu">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              "block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 dark:text-neutral-300 dark:hover:text-white dark:hover:bg-gray-800",
+              {
+                "bg-blue-50 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300":
+                  pathname === link.href,
+              },
+            ]}
+          >
+            {link.name}
+          </a>
+        ))
+      }
+      <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
+        <div class="flex items-center px-2">
+          <CartButton client:load />
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById("mobile-menu-button");
+  const menu = document.getElementById("mobile-menu");
+  const icons = btn?.querySelectorAll("svg");
+
+  btn?.addEventListener("click", () => {
+    menu?.classList.toggle("hidden");
+    icons?.forEach((icon) => icon.classList.toggle("hidden"));
+    const isExpanded = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", !isExpanded + "");
+  });
+</script>
